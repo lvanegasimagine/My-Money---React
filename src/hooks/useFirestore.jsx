@@ -1,6 +1,7 @@
 import { useReducer, useEffect, useState } from "react";
 import { projectFirestore } from "../firebase/config";
 import { FirestoreReducer } from "../reducer/FirestoreReducer";
+import { ADD_DOCUMENT, IS_PENDING, ERROR } from "../types/Types";
 
 let initialState = {
     document: null,
@@ -18,9 +19,24 @@ export const useFirestore = (collection) => {
     // TODO: collection ref
     const ref = projectFirestore.collection(collection);
 
-    // TODO: add a document
-    const addDocument = async (document) => {
+    // TODO: only dispatch is not cancelled
 
+    const dispatchIfNotCancelled = (action) => {
+        if(!isCancelled){
+            dispatch(action);
+        }
+    }
+
+    // TODO: add a document
+    const addDocument = async (doc) => {
+        dispatch({type: IS_PENDING});
+
+        try {
+            const addedDocument = await ref.add(doc);
+            dispatchIfNotCancelled({type: ADD_DOCUMENT, payload: addedDocument});
+        } catch (error) {
+            dispatchIfNotCancelled({type: ERROR, payload: error.message});
+        }
     }
 
     // TODO: delete a document
