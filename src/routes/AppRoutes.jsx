@@ -13,7 +13,7 @@ import Signup from "../pages/signup/Signup";
 const AppRoutes = () => {
   const { authIsReady, user } = useAuthContext();
   return (
-    <div className="app">
+    <>
       {authIsReady && (
         <Router>
           <Navbar />
@@ -33,7 +33,7 @@ const AppRoutes = () => {
           </Switch>
         </Router>
       )}
-    </div>
+    </>
   );
 };
 
