@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-console.log(import.meta.env.VITE_APIKEY);
 const firebaseConfig = {
   apiKey: "AIzaSyBf-pkh4p7zBg3aaZXpSfIKn037eT9DBjc",
   authDomain: "mymoney-7fe60.firebaseapp.com",
