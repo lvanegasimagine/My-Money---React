@@ -9,19 +9,14 @@ export default function TransactionForm({ uid }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addDocument({ uid, name, amount });
-
-    setName('');
-    setAmount('');
   };
 
-//   console.log(response.sucess);
-//   useEffect(() => {
-//     if (response.sucess) {
-//       setName("");
-//       setAmount("");
-//       console.log(response.success);
-//     }
-//   }, [response.success]);
+  useEffect(() => {
+    if (response.success) {
+      setName("");
+      setAmount("");
+    }
+  }, [response.success]);
 
   return (
     <>
